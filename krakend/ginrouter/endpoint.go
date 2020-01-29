@@ -34,6 +34,11 @@ type handler struct {
 	Base gin.HandlerFunc
 }
 
+const (
+	// ContextKey is a key for context value of span
+	ContextKey string = "opencensus-span"
+)
+
 func (h *handler) HandlerFunc(c *gin.Context) {
 	// Start the span here
 	var span opentracing.Span
@@ -52,6 +57,7 @@ func (h *handler) HandlerFunc(c *gin.Context) {
 	c.Request = c.Request.WithContext(ctx)
 
 	// Call the handler
+	c.Set(ContextKey, span)
 	h.Base(c)
 
 }
