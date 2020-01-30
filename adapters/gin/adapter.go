@@ -34,7 +34,7 @@ func Trace() gin.HandlerFunc {
 			)
 		}
 
-		span.SetTag(string(ext.SpanKind), string(ext.SpanKindRPCClientEnum))
+		span.SetTag(string(ext.SpanKind), string(ext.SpanKindRPCServerEnum))
 		span.SetTag(string(ext.PeerHostname), c.Request.Host)
 		span.SetTag(string(ext.HTTPUrl), c.Request.URL.Path)
 		span.SetTag(string(ext.HTTPMethod), c.Request.Method)
