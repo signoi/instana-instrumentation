@@ -1,7 +1,6 @@
 package adapter
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -44,13 +43,13 @@ func Trace() gin.HandlerFunc {
 		c.Request = wrapRequestWithSpanContext(c.Request, span)
 		c.Set(ContextKey, span)
 		// call the next
-		c.Next()
 		// set the response headers
 		tracer.Inject(span.Context(), opentracing.HTTPHeaders, opentracing.HTTPHeadersCarrier(c.Writer.Header()))
+		c.Next()
 		span.SetTag(string(ext.HTTPStatusCode), c.Writer.Status())
 
 		span.Finish()
-		fmt.Println("finished ", span.Context())
+
 	}
 }
 

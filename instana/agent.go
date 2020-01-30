@@ -122,7 +122,8 @@ func (r *agentS) fullRequestResponse(url string, method string, data interface{}
 		}
 
 		// Uncomment this to dump json payloads
-		// log.debug(bytes.NewBuffer(j))
+		log.debug(bytes.NewBuffer(j))
+		log.debug(string(j))
 
 		if err == nil {
 			req.Header.Set("Content-Type", "application/json")
