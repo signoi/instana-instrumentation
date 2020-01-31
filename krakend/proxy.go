@@ -77,6 +77,6 @@ func ProxyFactory(pf proxy.Factory) proxy.FactoryFunc {
 
 func BackendFactory(bf proxy.BackendFactory) proxy.BackendFactory {
 	return func(cfg *config.Backend) proxy.Proxy {
-		return Middleware("backend-" + cfg.URLPattern)(bf(cfg))
+		return Middleware("Proxy to " + cfg.URLPattern)(bf(cfg))
 	}
 }
